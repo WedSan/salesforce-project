@@ -10,21 +10,38 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
     private String companyName;
 
+    @Column(nullable = false)
     private String position;
 
+    @Column(nullable = false)
     private String companySector;
 
+    @Column(nullable = false)
     private int telephoneNumber;
 
     public UserEntity() {
+    }
+
+    public UserEntity(String name, String email, String password, String companyName, String position, String companySector, int telephoneNumber) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.companyName = companyName;
+        this.position = position;
+        this.companySector = companySector;
+        this.telephoneNumber = telephoneNumber;
     }
 
     public UserEntity(Long id, String name, String email, String password, String companyName, String position, String companySector, int telephoneNumber) {
