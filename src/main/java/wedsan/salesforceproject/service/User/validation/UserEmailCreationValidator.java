@@ -2,7 +2,7 @@ package wedsan.salesforceproject.service.User.validation;
 
 import org.springframework.stereotype.Component;
 import wedsan.salesforceproject.dto.request.UserCreationRequest;
-import wedsan.salesforceproject.exception.UserValidationException;
+import wedsan.salesforceproject.infra.exception.UserValidationException;
 import wedsan.salesforceproject.repository.UserEntityRepository;
 
 @Component

@@ -1,4 +1,4 @@
-package wedsan.salesforceproject.exception;
+package wedsan.salesforceproject.infra.exception;
 
 public class UserValidationException extends RuntimeException {
 

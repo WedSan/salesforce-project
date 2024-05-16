@@ -3,55 +3,56 @@ package wedsan.salesforceproject.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "TB_USER_SALESFORCE")
+@Table(name = "TB_USUARIO_SALESFORCE")
 public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "NOME")
     private String name;
 
-    @Column(nullable = false)
+    @Column(name = "SOBRENOME")
+    private String fullname;
+
+    @Column(name = "EMAIL")
     private String email;
 
-    @Column(nullable = false)
+    @Column(name = "SENHA")
     private String password;
 
-    @Column(nullable = false)
-    private String companyName;
-
-    @Column(nullable = false)
+    @Column(name = "CARGO")
     private String position;
 
-    @Column(nullable = false)
-    private String companySector;
+    @Column(name = "TELEFONE")
+    private String telephoneNumber;
 
-    @Column(nullable = false)
-    private int telephoneNumber;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "EMPRESA_ID", referencedColumnName = "ID")
+    private UserCompanyEntity userCompanyEntity;
 
     public UserEntity() {
     }
 
-    public UserEntity(String name, String email, String password, String companyName, String position, String companySector, int telephoneNumber) {
+    public UserEntity(String name, String fullname, String email, String password, String position, String telephoneNumber,  UserCompanyEntity userCompanyEntity) {
         this.name = name;
+        this.fullname = fullname;
         this.email = email;
         this.password = password;
-        this.companyName = companyName;
         this.position = position;
-        this.companySector = companySector;
+        this.userCompanyEntity = userCompanyEntity;
         this.telephoneNumber = telephoneNumber;
     }
 
-    public UserEntity(Long id, String name, String email, String password, String companyName, String position, String companySector, int telephoneNumber) {
+    public UserEntity(Long id, String name, String fullname, String email, String password, String position, String telephoneNumber, UserCompanyEntity userCompanyEntity) {
         this.id = id;
         this.name = name;
+        this.fullname = fullname;
         this.email = email;
         this.password = password;
-        this.companyName = companyName;
+        this.userCompanyEntity = userCompanyEntity;
         this.position = position;
-        this.companySector = companySector;
         this.telephoneNumber = telephoneNumber;
     }
 
@@ -71,6 +72,14 @@ public class UserEntity {
         this.name = name;
     }
 
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -87,13 +96,6 @@ public class UserEntity {
         this.password = password;
     }
 
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
 
     public String getPosition() {
         return position;
@@ -103,19 +105,20 @@ public class UserEntity {
         this.position = position;
     }
 
-    public String getCompanySector() {
-        return companySector;
-    }
 
-    public void setCompanySector(String companySector) {
-        this.companySector = companySector;
-    }
-
-    public int getTelephoneNumber() {
+    public String getTelephoneNumber() {
         return telephoneNumber;
     }
 
-    public void setTelephoneNumber(int telephoneNumber) {
+    public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
+    }
+
+    public UserCompanyEntity getUserCompanyEntity() {
+        return userCompanyEntity;
+    }
+
+    public void setUserCompanyEntity(UserCompanyEntity userCompanyEntity) {
+        this.userCompanyEntity = userCompanyEntity;
     }
 }
