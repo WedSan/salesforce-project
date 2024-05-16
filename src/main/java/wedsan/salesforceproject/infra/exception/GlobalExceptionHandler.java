@@ -1,7 +1,6 @@
-package wedsan.salesforceproject.exception;
+package wedsan.salesforceproject.infra.exception;
 
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -20,13 +19,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(UserValidationException.class)
-    public ResponseEntity<RequestErrorResponse> handleValidationException(ValidationException ex) {
+    public ResponseEntity<RequestErrorResponse> handleValidationException(UserValidationException ex) {
         return ResponseEntity.badRequest()
                 .body(createErrorResponse(ex.getMessage()));
     }
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<RequestErrorResponse> handleValidationException(RuntimeException ex) {
+        ex.printStackTrace();
         return ResponseEntity.badRequest()
                 .body(createErrorResponse(ex.getMessage()));
     }

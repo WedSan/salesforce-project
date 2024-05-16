@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import wedsan.salesforceproject.dto.request.UserCreationRequest;
-import wedsan.salesforceproject.exception.UserValidationException;
+import wedsan.salesforceproject.infra.exception.UserValidationException;
 import wedsan.salesforceproject.model.UserEntity;
 import wedsan.salesforceproject.service.User.UserService;
 
@@ -24,14 +24,9 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity createUser(@RequestBody @Valid UserCreationRequest userRequest){
-        try{
-            UserEntity userEntityCreated = userService.createUser(userRequest);
-            return ResponseEntity.status(HttpStatus.CREATED).body(userEntityCreated);
-        }catch(UserValidationException e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
+        UserEntity userEntityCreated = userService.createUser(userRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userEntityCreated);
     }
-
 
 
 }

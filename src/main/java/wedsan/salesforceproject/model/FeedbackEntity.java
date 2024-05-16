@@ -4,19 +4,17 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "TB_USUARIO_FEEDBACK")
 public class FeedbackEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String feedbackType;
 
-    @Column(nullable = false)
     private String feedbackText;
 
-    @Column(nullable = false)
     private int feedbackNote;
 
     private String userFeedbackEmail;

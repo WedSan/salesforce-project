@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import wedsan.salesforceproject.dto.request.LogInRequest;
 import wedsan.salesforceproject.dto.response.AuthenticationResponse;
-import wedsan.salesforceproject.exception.UserNotFoundException;
+import wedsan.salesforceproject.infra.exception.UserNotFoundException;
 import wedsan.salesforceproject.model.UserEntity;
 import wedsan.salesforceproject.repository.UserEntityRepository;
 import wedsan.salesforceproject.service.UserAuthenticationService;
@@ -29,7 +29,6 @@ public class LogInController {
 
     @PostMapping
     public ResponseEntity logInController(@RequestBody @Valid LogInRequest userRequest){
-        System.out.println(userRequest.email());
         boolean isAuthenticated = false;
         try{
             isAuthenticated = userService.authenticate(userRequest.email(), userRequest.password());
