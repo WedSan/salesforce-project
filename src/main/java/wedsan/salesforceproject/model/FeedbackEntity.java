@@ -11,12 +11,16 @@ public class FeedbackEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "TIPO_FEEDBACK")
     private String feedbackType;
 
+    @Column(name = "TEXTO_FEEDBACK")
     private String feedbackText;
 
+    @Column(name = "NOTA_FEEDBACK")
     private int feedbackNote;
 
+    @Column(name = "USUARIO_FEEDBACK_EMAIL")
     private String userFeedbackEmail;
 
     public FeedbackEntity() {

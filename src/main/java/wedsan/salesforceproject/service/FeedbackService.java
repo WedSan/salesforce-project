@@ -20,6 +20,8 @@ public class FeedbackService {
         feedbackEntityToBeSaved.setFeedbackText(feedbackRequest.feedbackText());
         feedbackEntityToBeSaved.setFeedbackNote(feedbackRequest.feedbackNote());
 
+        System.out.println(feedbackEntityToBeSaved.getFeedbackType());
+
         if(feedbackRequest.feedbackUserEmail() != null){
             feedbackEntityToBeSaved.setUserFeedbackEmail(feedbackRequest.feedbackUserEmail());
         }
