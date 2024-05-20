@@ -9,40 +9,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import wedsan.salesforceproject.dto.request.LogInRequest;
 import wedsan.salesforceproject.dto.response.AuthenticationResponse;
-import wedsan.salesforceproject.infra.exception.UserNotFoundException;
 import wedsan.salesforceproject.model.UserEntity;
 import wedsan.salesforceproject.repository.UserEntityRepository;
+import wedsan.salesforceproject.service.User.UserService;
 import wedsan.salesforceproject.service.UserAuthenticationService;
 
 @RestController
 @RequestMapping("/login")
 public class LogInController {
 
-    private UserAuthenticationService userService;
+    private UserAuthenticationService userAuthenticationService;
 
-    private UserEntityRepository userRepository;
+    private UserService userService;
 
-    public LogInController(UserAuthenticationService userService, UserEntityRepository userRepository) {
+    public LogInController(UserAuthenticationService userAuthenticationService, UserService userService) {
+        this.userAuthenticationService = userAuthenticationService;
         this.userService = userService;
-        this.userRepository = userRepository;
     }
 
     @PostMapping
     public ResponseEntity logInController(@RequestBody @Valid LogInRequest userRequest){
         boolean isAuthenticated = false;
-        try{
-            isAuthenticated = userService.authenticate(userRequest.email(), userRequest.password());
-        }
-        catch(UserNotFoundException e){
-            return ResponseEntity.notFound().build();
-        }
+
+        isAuthenticated = userAuthenticationService.authenticate(userRequest.email(), userRequest.password());
 
         if(isAuthenticated){
-            UserEntity user = userRepository.findByEmail(userRequest.email()).get();
-            return ResponseEntity.ok(new AuthenticationResponse(user.getName(), user.getEmail()));
+            UserEntity user =  userService.findByEmail(userRequest.email());
+            return ResponseEntity.ok(new AuthenticationResponse(user.getName(), user.getEmail(), "abcd98"));
         }
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-
     }
 }

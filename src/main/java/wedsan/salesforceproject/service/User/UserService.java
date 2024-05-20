@@ -2,6 +2,7 @@ package wedsan.salesforceproject.service.User;
 
 import org.springframework.stereotype.Service;
 import wedsan.salesforceproject.dto.request.UserCreationRequest;
+import wedsan.salesforceproject.infra.exception.UserNotFoundException;
 import wedsan.salesforceproject.infra.exception.UserValidationException;
 import wedsan.salesforceproject.model.UserCompanyEntity;
 import wedsan.salesforceproject.model.UserEntity;
@@ -10,6 +11,7 @@ import wedsan.salesforceproject.service.User.validation.UserValidator;
 import wedsan.salesforceproject.service.UserCompanyService;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -43,5 +45,13 @@ public class UserService {
                 userCompanyEntity);
 
         return userRepository.save(userEntityToBeCreated);
+    }
+
+    public UserEntity findByEmail(String email){
+        Optional<UserEntity> optionalUserEntity =  userRepository.findByEmail(email);
+        if(optionalUserEntity.isEmpty()){
+            throw new UserNotFoundException("Usuário com este email: "+email+" não existe");
+        }
+        return optionalUserEntity.get();
     }
 }

@@ -14,6 +14,7 @@ public class FeedbackEntity {
     @Column(name = "TIPO_FEEDBACK")
     private String feedbackType;
 
+    @Lob
     @Column(name = "TEXTO_FEEDBACK")
     private String feedbackText;
 

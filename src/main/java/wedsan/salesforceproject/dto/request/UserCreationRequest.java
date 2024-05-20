@@ -20,7 +20,6 @@ public record UserCreationRequest(
         @NotBlank
         String position,
         @NotNull
-        @Size(min = 11, max = 11, message = "deu ruim no numero")
         String telephoneNumber,
         @NotBlank
         String companyName,
