@@ -54,4 +54,8 @@ public class UserService {
         }
         return optionalUserEntity.get();
     }
+
+    public long countUsers(){
+        return userRepository.count();
+    }
 }

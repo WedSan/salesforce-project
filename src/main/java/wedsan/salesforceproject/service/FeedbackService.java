@@ -5,6 +5,8 @@ import wedsan.salesforceproject.dto.request.FeedbackRequest;
 import wedsan.salesforceproject.model.FeedbackEntity;
 import wedsan.salesforceproject.repository.FeedBackRepository;
 
+import java.util.List;
+
 @Service
 public class FeedbackService {
 
@@ -27,5 +29,9 @@ public class FeedbackService {
         }
 
         return feedBackRepository.save(feedbackEntityToBeSaved);
+    }
+
+    public List<FeedbackEntity> getAllFeedback() {
+        return feedBackRepository.findAll();
     }
 }

@@ -2,8 +2,10 @@ package wedsan.salesforceproject.service;
 
 import org.springframework.stereotype.Service;
 import wedsan.salesforceproject.model.UserCompanyEntity;
+import wedsan.salesforceproject.model.UserEntity;
 import wedsan.salesforceproject.repository.UserCompanyRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,4 +29,6 @@ public class UserCompanyService {
 
          return userCompanyRepository.save(userCompanyEntity);
     }
+
+
 }
